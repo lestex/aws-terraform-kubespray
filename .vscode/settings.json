@@ -1,9 +1,8 @@
 {
-  "emeraldwalk.runonsave": {
+  "saveAndRun": {
     "commands": [
       {
         "match": ".tf",
-        "isAsync": true,
         "cmd": "terraform fmt"
       }
     ]
