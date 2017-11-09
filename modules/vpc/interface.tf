@@ -34,6 +34,11 @@ variable "name" {
   description = "a name for tagging"
 }
 
+variable "map_public_ip_on_launch" {
+  description = "Map public IP on launch for public subnet"
+  default     = true
+}
+
 output "vpc_id" {
   value = "${aws_vpc.self.id}"
 }
