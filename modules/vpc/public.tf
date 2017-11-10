@@ -1,3 +1,8 @@
+##############################
+# public networking
+##############################
+
+# Create an Internet gateway for internet access
 resource "aws_internet_gateway" "self" {
   vpc_id = "${aws_vpc.self.id}"
 
@@ -10,7 +15,7 @@ resource "aws_internet_gateway" "self" {
   }
 }
 
-# Create route tables
+# Create a route table
 resource "aws_route_table" "public" {
   vpc_id = "${aws_vpc.self.id}"
 
@@ -21,12 +26,14 @@ resource "aws_route_table" "public" {
   }
 }
 
+# Create a route
 resource "aws_route" "public_to_internet" {
   route_table_id         = "${aws_route_table.public.id}"
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = "${aws_internet_gateway.self.id}"
 }
 
+# Create public networks count based on var.public_subnets from top
 resource "aws_subnet" "public" {
   vpc_id                  = "${aws_vpc.self.id}"
   cidr_block              = "${var.public_subnets[count.index]}"
@@ -42,10 +49,9 @@ resource "aws_subnet" "public" {
   count = "${length(var.public_subnets)}"
 }
 
+# Associate public networks with route table
 resource "aws_route_table_association" "public" {
   count          = "${length(var.public_subnets)}"
   subnet_id      = "${aws_subnet.public.*.id[count.index]}"
   route_table_id = "${aws_route_table.public.id}"
 }
-
-data "aws_availability_zones" "available" {}
