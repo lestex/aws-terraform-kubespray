@@ -9,7 +9,7 @@ resource "aws_vpc" "self" {
   tags {
     builtWith         = "terraform"
     KubernetesCluster = "${var.name}"
-    Name              = "lestex-${var.name}"
+    Name              = "${var.name}"
     visibility        = "private,public"
     environment       = "${var.environment}"
   }
