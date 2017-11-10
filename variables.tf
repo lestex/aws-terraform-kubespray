@@ -20,3 +20,7 @@ variable "name" {
 variable PATH_TO_PUBLIC_KEY {
   default = "~/.ssh/id_rsa.pub"
 }
+
+variable "public_subnets" {
+  default = ["10.0.1.0/24", "10.0.2.0/24"]
+}

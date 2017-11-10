@@ -46,27 +46,3 @@ variable "map_public_ip_on_launch" {
 variable "private_network" {
   description = "Create private network (bool)"
 }
-
-######################################
-# data providers
-######################################
-data "aws_availability_zones" "available" {}
-
-######################################
-# output variables
-######################################
-output "vpc_id" {
-  value = "${aws_vpc.self.id}"
-}
-
-output "public_subnets" {  
-  value = "${aws_subnet.public.*.id}"
-}
-
-output "default_sg" {
-  value = "${aws_vpc.self.default_security_group_id}"
-}
-
-output "allow_ssh-sg" {
-  value = "${aws_security_group.allow_ssh-sg.id}"
-}
