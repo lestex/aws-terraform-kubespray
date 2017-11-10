@@ -1,6 +1,6 @@
-/************************
-* aws settings
-************************/
+#########################
+# terraform variables
+#########################
 variable "region" {
   default = "eu-central-1"
 }
@@ -15,4 +15,8 @@ variable "vpc_cidr" {
 
 variable "name" {
   default = "aws-kubernetes"
+}
+
+variable PATH_TO_PUBLIC_KEY {
+  default = "~/.ssh/id_rsa.pub"
 }
