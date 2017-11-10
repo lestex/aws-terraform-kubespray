@@ -43,6 +43,6 @@ variable "map_public_ip_on_launch" {
   default     = true
 }
 
-variable "private_network" {
-  description = "Create private network (bool)"
+variable "nat_gateway_create" {
+  description = "Create nat gateway (bool)"
 }

@@ -7,5 +7,6 @@ module "vpc" {
   name                    = "${var.name}"
   map_public_ip_on_launch = true
   public_subnets          = "${var.public_subnets}"
-  private_network         = false
+  private_subnets         = "${var.private_subnets}"
+  nat_gateway_create      = false
 }
