@@ -44,11 +44,11 @@ variable "map_public_ip_on_launch" {
 }
 
 variable "enable_nat_gateway" {
-  description = "Enable nat gateway (bool)"
-  default     = true
+  description = "Set to TRUE to enable nat gateway for private network"
+  default     = false
 }
 
 variable "multi_nat_gateway" {
-  description = "Create multiple nat gateways (bool)"
+  description = "Set to TRUE to create multiple nat gateways for each private subnet"
   default     = false
 }
