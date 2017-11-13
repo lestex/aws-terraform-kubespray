@@ -8,5 +8,5 @@ module "vpc" {
   map_public_ip_on_launch = true
   public_subnets          = "${var.public_subnets}"
   private_subnets         = "${var.private_subnets}"
-  multi_nat_gateway       = false
+  multi_nat_gateway       = true
 }
