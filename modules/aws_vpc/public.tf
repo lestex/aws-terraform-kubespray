@@ -4,10 +4,11 @@
 
 # Create an Internet gateway for internet access
 resource "aws_internet_gateway" "self" {
+  count  = "${length(var.public_subnets) > 0 ? 1 : 0}"
   vpc_id = "${aws_vpc.self.id}"
 
   tags {
-    Name              = "lestex-${var.name}"
+    Name              = "${var.name}"
     builtWith         = "terraform"
     KubernetesCluster = "${var.name}"
     visibility        = "private,public"
@@ -17,6 +18,7 @@ resource "aws_internet_gateway" "self" {
 
 # Create a route table
 resource "aws_route_table" "public" {
+  count  = "${length(var.public_subnets) > 0 ? 1 : 0}"
   vpc_id = "${aws_vpc.self.id}"
 
   tags {
@@ -28,6 +30,7 @@ resource "aws_route_table" "public" {
 
 # Create a route
 resource "aws_route" "public_to_internet" {
+  count                  = "${length(var.public_subnets) > 0 ? 1 : 0}"
   route_table_id         = "${aws_route_table.public.id}"
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = "${aws_internet_gateway.self.id}"
@@ -35,6 +38,7 @@ resource "aws_route" "public_to_internet" {
 
 # Create public networks count based on var.public_subnets from top
 resource "aws_subnet" "public" {
+  count                   = "${length(var.public_subnets)}"
   vpc_id                  = "${aws_vpc.self.id}"
   cidr_block              = "${var.public_subnets[count.index]}"
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
@@ -45,8 +49,6 @@ resource "aws_subnet" "public" {
     builtWith         = "terraform"
     KubernetesCluster = "${var.name}"
   }
-
-  count = "${length(var.public_subnets)}"
 }
 
 # Associate public networks with route table

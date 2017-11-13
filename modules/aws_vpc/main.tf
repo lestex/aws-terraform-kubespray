@@ -15,12 +15,6 @@ resource "aws_vpc" "self" {
   }
 }
 
-# resource "null_resource" "dummy_dependency" {
-#   depends_on = [
-#     "aws_vpc.self",
-#   ]
-# }
-
 ####################
 # data providers
 ####################

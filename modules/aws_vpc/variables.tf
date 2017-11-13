@@ -43,6 +43,12 @@ variable "map_public_ip_on_launch" {
   default     = true
 }
 
+variable "enable_nat_gateway" {
+  description = "Enable nat gateway (bool)"
+  default     = true
+}
+
 variable "multi_nat_gateway" {
-  description = "Create nat gateway (bool)"
+  description = "Create multiple nat gateways (bool)"
+  default     = false
 }
