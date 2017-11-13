@@ -6,11 +6,13 @@ output "vpc_id" {
 }
 
 output "public_subnets" {
-  value = "${aws_subnet.public.*.id}"
+  description = "List of IDs of public subnets"
+  value       = "${aws_subnet.public.*.id}"
 }
 
 output "private_subnets" {
-  value = "${aws_subnet.private.*.id}"
+  description = "List of IDs of private subnets"
+  value       = "${aws_subnet.private.*.id}"
 }
 
 output "default_sg" {

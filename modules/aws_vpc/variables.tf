@@ -1,6 +1,13 @@
 ##############################
 # input and output variables
 ##############################
+variable "name" {
+  description = "a name for tagging"
+}
+
+variable "vpc_cidr" {
+  description = "The CIDR of the VPC."
+}
 
 variable "region" {
   description = "The AWS region."
@@ -20,10 +27,6 @@ variable "enable_dns_support" {
   default     = true
 }
 
-variable "vpc_cidr" {
-  description = "The CIDR of the VPC."
-}
-
 variable "public_subnets" {
   description = "The list of public subnets to populate."
   default     = []
@@ -32,10 +35,6 @@ variable "public_subnets" {
 variable "private_subnets" {
   description = "The list of private subnets to populate."
   default     = []
-}
-
-variable "name" {
-  description = "a name for tagging"
 }
 
 variable "map_public_ip_on_launch" {
