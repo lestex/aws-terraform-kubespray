@@ -10,7 +10,7 @@ resource "aws_instance" "node" {
   subnet_id  = "${module.vpc.public_subnets[0]}"
   private_ip = "${cidrhost("10.0.1.0/24", 100 + count.index)}"
 
-  vpc_security_group_ids = ["${module.vpc.default_sg}", "${module.vpc.allow_ssh-sg}"]
+  vpc_security_group_ids = ["${module.vpc.default_sg}"]
   key_name               = "mykeypair"
 
   tags {
