@@ -9,7 +9,7 @@
   },
   "files.exclude": {
     "*terraform.tfstate*": "explorerExcludedFiles",
-    "*out*": "explorerExcludedFiles",
+    "*out.terraform*": "explorerExcludedFiles",
     "*terraform*": "explorerExcludedFiles"
   }
 }

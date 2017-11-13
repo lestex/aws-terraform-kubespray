@@ -25,4 +25,3 @@ resource "aws_vpc" "self" {
 # data providers
 ####################
 data "aws_availability_zones" "available" {}
-

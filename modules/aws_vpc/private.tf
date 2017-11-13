@@ -13,7 +13,7 @@ resource "aws_nat_gateway" "self" {
 # Create elastic IP for nat gateway
 resource "aws_eip" "self" {
   count = "${length(var.private_subnets) - (length(var.private_subnets) -1)}"
-  vpc = true
+  vpc   = true
 }
 
 # Create route table for private network
