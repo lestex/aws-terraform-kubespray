@@ -9,8 +9,8 @@
 - `private_subnets` - list of private subnet cidrs
 - `enable_dns_hostnames` - should be true if you want to use private DNS within the VPC
 - `enable_dns_support` - should be set true to use private DNS within the VPC
-- `enable_nat_gateway` - should be true if you want to provision NAT Gateways
-- `multi_nat_gateway` - should be true if you want to provision a single shared NAT Gateway across all of your private networks
+- `enable_nat_gateway` - should be true if you want to provision NAT Gateways (default - false)
+- `multi_nat_gateway` - should be true if you want to provision a multiple NAT Gateways across all of your private networks (default - false)
 - `map_public_ip_on_launch` - should be false if you do not want to auto-assign public IP on launch
 
 ## Usage
@@ -19,15 +19,17 @@
 module "vpc" {
   source = "./modules/aws_vpc"
 
-  name                    = "vpc"
-  environment             = "development"
-  region                  = "${var.region}"
-  vpc_cidr                = "10.0.0.0/16"
+  name        = "aws-kubernetes"
+  environment = "development"
+  region      = "${var.region}"
+  vpc_cidr    = "10.0.0.0/16"
+
+  public_subnets  = ["10.0.1.0/24", "10.0.2.0/24"]
+  private_subnets = ["10.0.10.0/24", "10.0.20.0/24"]
+
   map_public_ip_on_launch = true
-  public_subnets          = ["10.0.1.0/24", "10.0.2.0/24"]
-  private_subnets         = ["10.0.10.0/24", "10.0.20.0/24"]
   enable_nat_gateway      = true
-  multi_nat_gateway       = false
+  multi_nat_gateway       = true
 }
 ```
 
