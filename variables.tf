@@ -27,10 +27,20 @@ variable "amis" {
 
 variable "k8s-nodes-count" {
   description = "number of worker nodes in the cluster"
+  default     = 0
+}
+
+variable "k8s-controllers-count" {
+  description = "number of control plane servers in the cluster"
   default     = 2
 }
 
 variable "node_instance_type" {
+  description = "node instance type"
+  default     = "t2.nano"
+}
+
+variable "controller_instance_type" {
   description = "node instance type"
   default     = "t2.nano"
 }
