@@ -35,6 +35,11 @@ variable "k8s-controllers-count" {
   default     = 2
 }
 
+variable "etcd-servers-count" {
+  description = "number of etcd servers in the cluster"
+  default     = 2
+}
+
 variable "node_instance_type" {
   description = "node instance type"
   default     = "t2.nano"

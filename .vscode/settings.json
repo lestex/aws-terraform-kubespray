@@ -10,6 +10,7 @@
   "files.exclude": {
     "*terraform.tfstate*": "explorerExcludedFiles",
     "*out.terraform*": "explorerExcludedFiles",
-    "*terraform*": "explorerExcludedFiles"
+    "*terraform*": "explorerExcludedFiles",
+    "amivar.tf": "explorerExcludedFiles"
   }
 }
