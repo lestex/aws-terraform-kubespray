@@ -45,6 +45,11 @@ variable "controller_instance_type" {
   default     = "t2.nano"
 }
 
+variable "etcd_instance_type" {
+  description = "etcd instance type"
+  default     = "t2.nano"
+}
+
 variable "keypair_name" {
   default = "mykeypair"
 }
