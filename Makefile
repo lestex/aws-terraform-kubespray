@@ -3,21 +3,29 @@ GREEN	:= \033[0;32m
 RED   := \033[0;31m
 NC    := \033[0m
 
-all: prereqs init apply
-	@echo "${GREEN}✓ terraform portion of 'make all' has completed ${NC}\n"
+all: prereqs plan
+	@echo "${GREEN}✓ 'make all' has completed ${NC}\n"
 	@$(MAKE) -s post-terraform
 
 prereqs: ; @scripts/getip
 
-init: ; @scripts/init
+init: ; @echo "${GREEN}✓ initializing terraform ${NC}\n"
+		@terraform get
+	  	@terraform init
+		@$(MAKE) -s post-terraform
 
-apply: ; @scripts/apply
+plan: ; @terraform plan --out out.terraform
+
+apply: ; @terraform apply out.terraform
+
+delete: ; @terraform destroy -force
 
 packer: ; @scripts/packer
 
-post-terraform:
-	@echo "DONE."
+post-terraform:	; @echo "${BLUE}✓ DONE. ${NC}\n"
 
 .PHONY: post-terraform
-.PHONY: packer 
+.PHONY: packer
+.PHONY: destroy
 
+destroy: delete post-terraform
