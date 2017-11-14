@@ -20,6 +20,7 @@ apply: ; @terraform apply out.terraform
 
 destroy: ; @echo "${RED}✓ destroying terraform resources ${NC}\n"
 		   @terraform destroy -force
+		   @-rm -f amivar.tf
 
 packer: ; @scripts/packer
 
