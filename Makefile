@@ -35,6 +35,10 @@ packer: ; @scripts/packer
 # run post actions
 post-action:	; @echo "${BLUE}✓ DONE. ${NC}\n"
 
+# make graph
+graph: ; @terraform graph > web.dot
+		 @dot web.dot -Tsvg -o web.svg
+
 .PHONY: post-action
 .PHONY: packer
 .PHONY: destroy
