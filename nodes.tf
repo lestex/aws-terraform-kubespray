@@ -25,7 +25,3 @@ resource "aws_key_pair" "mykeypair" {
   key_name   = "mykeypair"
   public_key = "${file("${var.PATH_TO_PUBLIC_KEY}")}"
 }
-
-output "kubernetes_nodes_public_ip" {
-  value = "${join(",", aws_instance.node.*.public_ip)}"
-}

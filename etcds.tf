@@ -18,4 +18,6 @@ resource "aws_instance" "etcd" {
     Owner = "kubernetes"
     Name  = "etcd-${count.index}"
   }
+
+  depends_on = ["module.vpc"]
 }
