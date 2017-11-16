@@ -27,7 +27,7 @@ apply: ; @terraform apply out.terraform
 # destroy all resources and amivar.tf file
 destroy: ; @echo "${RED}✓ destroying terraform resources ${NC}\n"
 		   @terraform destroy -force
-		   @-rm -f amivar.tf
+		   @-rm -f amivar.tf web.*
 
 # run packer to build a custom image
 packer: ; @scripts/packer
