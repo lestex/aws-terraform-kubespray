@@ -1,23 +1,42 @@
 ---
 - hosts: all
-  gather_facts: false # As Python is not yet installed, we cannot gather host facts
+  gather_facts: false
 
+# check and install python
   tasks:
     - name: Check python installed
-      raw: "python -V"      
+      raw: "python -V"
+      retries: 10
+      delay: 20
+      ignore_errors: yes
       register: output
       changed_when: false
 
     - name: Apt update
       raw: "apt-get -y update"
-      become: true
-      retries: 10
-      delay: 20
+      become: true      
       when: output.rc != 0
 
     - name: Install Python
       raw: "apt-get -y -q install python"
-      become: true
-      retries: 10
-      delay: 20
+      become: true      
       when: output.rc != 0
+
+# setting up controller nodes  
+- hosts: controller
+  gather_facts: false
+  roles:
+    - common
+  
+# setting up etcd nodes  
+- hosts: etcd
+  gather_facts: false
+  roles:
+    - common
+
+# setting up worker nodes
+- hosts: worker
+  gather_facts: false
+  roles:
+    - common
+
