@@ -6,10 +6,10 @@ RED   := \033[0;31m
 NC    := \033[0m
 
 # run all
-all: prereqs plan apply provision
+all: plan apply provision
 	@echo "${GREEN}✓ 'make all' has completed ${NC}\n"
 
-prereqs: ; @scripts/getip
+getip: ; @scripts/getip
 
 # initial terraform setup
 init: ; @echo "${GREEN}✓ Initializing terraform ${NC}\n"
@@ -26,7 +26,7 @@ apply: ; @terraform apply out.terraform
 # destroy all resources and amivar.tf file
 destroy: ; @echo "${RED}✓ Destroying terraform resources ${NC}\n"
 		   @terraform destroy -force
-		   @-rm -f amivar.tf web.*
+		   @-rm -f amivar.tf web.* ansible/*.retry
 		   @$(MAKE) -s post-action
 
 # run packer to build a custom image
