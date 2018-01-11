@@ -17,6 +17,7 @@ resource "aws_instance" "controller" {
   tags {
     Owner = "kubernetes"
     Name  = "controller-${count.index}"
+    ansibleNodeType = "controller"
   }
 
   depends_on = ["module.vpc"]

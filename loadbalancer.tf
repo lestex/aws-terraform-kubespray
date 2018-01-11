@@ -31,9 +31,9 @@ resource "aws_elb" "kubernetes_api" {
   }
 }
 
-####################
+###############################
 ## Security group
-####################
+###############################
 
 resource "aws_security_group" "kubernetes_api" {
   vpc_id = "${module.vpc.vpc_id}"
@@ -59,9 +59,9 @@ resource "aws_security_group" "kubernetes_api" {
   }
 }
 
-############
+###############################
 ## Outputs
-############
+###############################
 
 output "kubernetes_api_dns_name" {
   value = "${aws_elb.kubernetes_api.dns_name}"
