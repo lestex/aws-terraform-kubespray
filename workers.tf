@@ -1,6 +1,6 @@
-#############
-# K8s nodes
-#############
+###############################
+# K8s workers
+###############################
 
 resource "aws_instance" "node" {
   count         = "${var.k8s-nodes-count}"
@@ -15,7 +15,7 @@ resource "aws_instance" "node" {
 
   tags {
     Owner = "kubernetes"
-    Name  = "node-${count.index}"
+    Name  = "worker-${count.index}"
     ansibleNodeType = "worker"
   }
 
