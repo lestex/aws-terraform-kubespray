@@ -3,3 +3,4 @@
 *terraform*
 amivar.tf
 *web.*
+*.retry
