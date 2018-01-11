@@ -1,15 +1,4 @@
 ---
-- name: Testing controller
+- name: Common role
   debug:
-    msg: "Testing controller"
-  when: "'controller' in group_names"
-
-- name: Testing etcd
-  debug:
-    msg: "Testing controller"
-  when: "'etcd' in group_names"
-
-- name: Testing worker
-  debug:
-    msg: "Testing controller"
-  when: "'worker' in group_names"
+    msg: "Common role"  
