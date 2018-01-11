@@ -9,23 +9,24 @@ NC    := \033[0m
 all: plan apply provision
 	@echo "${GREEN}✓ 'make all' has completed ${NC}\n"
 
-getip: ; @scripts/getip
-
 # initial terraform setup
 init: ; @echo "${GREEN}✓ Initializing terraform ${NC}\n"
-		@terraform get
-	  	@terraform init
+		@cd terraform && terraform get && terraform init
 		@$(MAKE) -s post-action
 
 # plan terraform
-plan: ; @terraform plan --out out.terraform
+plan: ; @echo "${GREEN}✓ Planning terraform ${NC}\n"
+		@cd terraform && terraform plan --out out.terraform
+		@$(MAKE) -s post-action
 
 # apply terraform
-apply: ; @terraform apply out.terraform
+apply: ; @echo "${GREEN}✓ Applying terraform ${NC}\n"
+		 @cd terraform && terraform apply out.terraform
+		 @$(MAKE) -s post-action
 
 # destroy all resources and amivar.tf file
 destroy: ; @echo "${RED}✓ Destroying terraform resources ${NC}\n"
-		   @terraform destroy -force
+		   @cd terraform && terraform destroy -force
 		   @-rm -f amivar.tf web.* ansible/*.retry
 		   @$(MAKE) -s post-action
 
@@ -44,6 +45,8 @@ post-action: ; @echo "${BLUE}✓ Done. ${NC}\n"
 # make graph
 graph: ; @terraform graph > web.dot
 		 @dot web.dot -Tsvg -o web.svg
+
+getip: ; @scripts/getip
 
 .PHONY: post-action
 .PHONY: packer

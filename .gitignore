@@ -1,6 +1,6 @@
-*terraform.tfstate*
-*out.terraform*
-*terraform*
+terraform.tfstate*
+out.terraform
+.terraform
 amivar.tf
 *web.*
 *.retry
