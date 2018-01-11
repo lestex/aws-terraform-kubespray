@@ -8,9 +8,11 @@
     ]
   },
   "files.exclude": {
-    "*terraform.tfstate*": "explorerExcludedFiles",
-    "*out.terraform*": "explorerExcludedFiles",
+    "*/terraform.tfstate*": "explorerExcludedFiles",
+    "*/out.terraform*": "explorerExcludedFiles",
     "amivar.tf": "explorerExcludedFiles",
-    "*web.*": "explorerExcludedFiles"
+    "*web.*": "explorerExcludedFiles",
+    ".terraform": "explorerExcludedFiles",
+    "*/.terraform": "explorerExcludedFiles"
   }
 }
