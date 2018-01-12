@@ -21,25 +21,25 @@
       raw: "apt-get -y -q install python"
       become: true      
       when: output.rc != 0
-  
+
+# setting up etcd nodes  
+- hosts: etcd
+  gather_facts: false
   roles:
     - common
+    - test
 
 # setting up controller nodes  
 - hosts: controller
   gather_facts: false
   roles:
-    - test
-  
-# setting up etcd nodes  
-- hosts: etcd
-  gather_facts: false
-  roles:
+    - common
     - test
 
 # setting up worker nodes
 - hosts: worker
   gather_facts: false
   roles:
+    - common
     - test
 
