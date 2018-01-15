@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function is_installed {
+    if [ -f /usr/local/bin/$1 ]
+    then 
+        echo "$1 is already installed"
+    else
+        echo "Installing: $1"
+        brew install $1        
+    fi
+}
+
+# Install kubectl cfssl
+# will also install cfssljson
+for app in kubectl cfssl
+do
+    is_installed $app
+done
