@@ -7,7 +7,7 @@ NC    := \033[0m
 
 # run all
 all: plan apply provision
-	@echo "${GREEN}✓ 'make all' has completed ${NC}\n"
+		@echo "${GREEN}✓ 'make all' has completed ${NC}\n"
 
 # initial terraform setup
 init: ; @echo "${GREEN}✓ Initializing terraform ${NC}\n"
