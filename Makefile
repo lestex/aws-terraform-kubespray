@@ -6,7 +6,7 @@ RED   := \033[0;31m
 NC    := \033[0m
 
 # run all
-all: plan apply provision
+all: pre plan apply provision
 	@echo "${GREEN}✓ 'make all' has completed ${NC}\n"
 
 # initial terraform setup
@@ -27,7 +27,7 @@ apply: ; @echo "${GREEN}✓ Applying terraform ${NC}\n"
 # destroy all resources and amivar.tf file
 destroy: ; @echo "${RED}✓ Destroying terraform resources ${NC}\n"
 	@cd terraform && terraform destroy -force
-	@-rm -f amivar.tf web.* ansible/*.retry
+	@-rm -f amivar.tf web.* ansible/*.retry certs/*.pem certs/*.csr
 	@$(MAKE) -s post-action
 .PHONY: destroy
 
@@ -40,10 +40,12 @@ packer: ; @echo "${GREEN}✓ Running packer${NC}\n"
 provision: ; @echo "${GREEN}✓ Provisioning hosts with Ansible${NC}\n"
 	@scripts/ansible
 	@$(MAKE) -s post-action
+.PHONY: provision
 
-pre: ; @echo "${GREEN}✓ Installing prerequisites ${NC}\n"
+pre: ; @echo "${GREEN}✓ Installing prerequisites${NC}\n"
 	@scripts/prerequisites
 	@$(MAKE) -s post-action
+.PHONY: pre
 
 # run post actions
 post-action: ; @echo "${BLUE}✓ Done. ${NC}\n"

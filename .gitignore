@@ -5,3 +5,6 @@
 amivar.tf
 *.retry
 .DS_Store
+terraform/.terraform.tfstate.*
+*.pem
+*.csr

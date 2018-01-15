@@ -2,7 +2,7 @@
 # K8s workers
 ###############################
 
-resource "aws_instance" "node" {
+resource "aws_instance" "worker" {
   count         = "${var.k8s-nodes-count}"
   ami           = "${lookup(var.amis, var.region)}"
   instance_type = "${var.node_instance_type}"
