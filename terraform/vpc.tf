@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "github.com/lestex/aws-vpc-tf"
+  source = "github.com/lestex/aws-vpc-tf/module"
 
   name        = "aws-kubernetes"
   environment = "development"
