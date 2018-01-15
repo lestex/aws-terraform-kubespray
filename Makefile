@@ -29,11 +29,13 @@ destroy: ; @echo "${RED}✓ Destroying terraform resources ${NC}\n"
 	@cd terraform && terraform destroy -force
 	@-rm -f amivar.tf web.* ansible/*.retry
 	@$(MAKE) -s post-action
+.PHONY: destroy
 
 # run packer to build a custom image
 packer: ; @echo "${GREEN}✓ Running packer${NC}\n"
 	@scripts/packer
 	@$(MAKE) -s post-action
+.PHONY: packer
 
 provision: ; @echo "${GREEN}✓ Provisioning hosts with Ansible${NC}\n"
 	@scripts/ansible
@@ -41,16 +43,13 @@ provision: ; @echo "${GREEN}✓ Provisioning hosts with Ansible${NC}\n"
 
 # run post actions
 post-action: ; @echo "${BLUE}✓ Done. ${NC}\n"
+.PHONY: post-action
 
 # make graph
 graph: ; @terraform graph > web.dot
 	@dot web.dot -Tsvg -o web.svg
 
 getip: ; @scripts/getip
-
-.PHONY: post-action
-.PHONY: packer
-.PHONY: destroy
 
 # destroy all
 d: destroy post-action
