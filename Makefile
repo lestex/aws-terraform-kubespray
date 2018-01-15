@@ -41,6 +41,10 @@ provision: ; @echo "${GREEN}✓ Provisioning hosts with Ansible${NC}\n"
 	@scripts/ansible
 	@$(MAKE) -s post-action
 
+pre: ; @echo "${GREEN}✓ Installing prerequisites ${NC}\n"
+	@scripts/prerequisites
+	@$(MAKE) -s post-action
+
 # run post actions
 post-action: ; @echo "${BLUE}✓ Done. ${NC}\n"
 .PHONY: post-action
