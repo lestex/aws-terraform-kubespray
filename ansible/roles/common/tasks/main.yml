@@ -1,4 +1,0 @@
----
-- name: Common role
-  debug:
-    msg: "Common role"  

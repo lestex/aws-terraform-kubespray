@@ -10,9 +10,8 @@ function is_installed {
     fi
 }
 
-# Install kubectl cfssl
-# will also install cfssljson
-for app in kubectl cfssl
+# Install kubectl
+for app in kubectl git
 do
     is_installed $app
 done

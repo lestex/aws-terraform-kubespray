@@ -6,7 +6,7 @@ RED   := \033[0;31m
 NC    := \033[0m
 
 # run all
-all: pre plan apply provision
+all: pre plan apply kubespray
 	@echo "${GREEN}✓ 'make all' has completed ${NC}\n"
 
 # initial terraform setup
@@ -27,15 +27,15 @@ apply: ; @echo "${GREEN}✓ Applying terraform ${NC}\n"
 # destroy all resources and amivar.tf file
 destroy: ; @echo "${RED}✓ Destroying terraform resources ${NC}\n"
 	@cd terraform && terraform destroy -force
-	@-rm -f amivar.tf web.* ansible/*.retry certs/*.pem certs/*.csr
+	@-rm -f kubespray inventory/hosts
 	@$(MAKE) -s post-action
 .PHONY: destroy
 
 # run packer to build a custom image
-packer: ; @echo "${GREEN}✓ Running packer${NC}\n"
-	@scripts/packer
+kubespray: ; @echo "${GREEN}✓ Cloning Kubespray${NC}\n"
+	@scripts/kubespray
 	@$(MAKE) -s post-action
-.PHONY: packer
+.PHONY: kubespray
 
 provision: ; @echo "${GREEN}✓ Provisioning hosts with Ansible${NC}\n"
 	@scripts/ansible
@@ -50,12 +50,3 @@ pre: ; @echo "${GREEN}✓ Installing prerequisites${NC}\n"
 # run post actions
 post-action: ; @echo "${BLUE}✓ Done. ${NC}\n"
 .PHONY: post-action
-
-# make graph
-graph: ; @terraform graph > web.dot
-	@dot web.dot -Tsvg -o web.svg
-
-getip: ; @scripts/getip
-
-# destroy all
-d: destroy post-action
