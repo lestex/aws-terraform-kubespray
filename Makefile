@@ -6,7 +6,7 @@ RED   := \033[0;31m
 NC    := \033[0m
 
 # run all
-all: pre plan apply kubespray
+all: pre plan apply provision
 	@echo "${GREEN}✓ 'make all' has completed ${NC}\n"
 
 # initial terraform setup
@@ -31,14 +31,8 @@ destroy: ; @echo "${RED}✓ Destroying terraform resources ${NC}\n"
 	@$(MAKE) -s post-action
 .PHONY: destroy
 
-# run packer to build a custom image
-kubespray: ; @echo "${GREEN}✓ Cloning Kubespray${NC}\n"
+provision: ; @echo "${GREEN}✓ Provisioning hosts with Kubespray${NC}\n"
 	@scripts/kubespray
-	@$(MAKE) -s post-action
-.PHONY: kubespray
-
-provision: ; @echo "${GREEN}✓ Provisioning hosts with Ansible${NC}\n"
-	@scripts/ansible
 	@$(MAKE) -s post-action
 .PHONY: provision
 

@@ -1,0 +1,19 @@
+#!/bin/bash
+KUBESPRAY_REPO=https://github.com/kubernetes-incubator/kubespray
+KUBESPRAY_DIR=kuberspray
+INVENTORY_DIR=inventory
+
+if [ ! -d $KUBESPRAY_DIR ]
+then
+    git clone $KUBESPRAY_REPO $KUBESPRAY_DIR
+else
+    echo "$KUBESPRAY_DIR already exists... skiping"
+fi
+
+if [ -f $INVENTORY_DIR/hosts ]
+then
+    cd $KUBESPRAY_DIR
+    ansible-playbook -u ubuntu -b -i ../inventory/hosts cluster.yml
+else
+    echo "Hosts file was not found in $INVENTORY_DIR"
+fi

@@ -5,4 +5,4 @@
 *.retry
 .DS_Store
 terraform/.terraform.tfstate.*
-kubespray/
+kubespray
